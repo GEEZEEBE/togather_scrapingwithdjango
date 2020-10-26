@@ -21,12 +21,12 @@ from jobscraping01 import job01_ceg, job01_jhc, job01_jhj, job01_lkh, job01_oes,
 def call_scrapping():
     t = time.localtime()
     print(f'{t.tm_year}.{t.tm_mon}.{t.tm_mday}-{t.tm_hour}:{t.tm_min}:{t.tm_sec} start - junhee', end="")
-    job01_ceg.Scrap()
-    job01_jhc.scrapping_jobkorea()
-    job01_jhj.worknet()
+    # job01_ceg.Scrap()
+    # job01_jhc.scrapping_jobkorea()
+    # job01_jhj.worknet()
     job01_lkh.job()
-    job01_oes.ReadWorkGoKr()
-    job01_pgj.w2m()
+    # job01_oes.ReadWorkGoKr()
+    # job01_pgj.w2m()
     print('- complete')
 
 schedule.every(1).seconds.do(call_scrapping)
