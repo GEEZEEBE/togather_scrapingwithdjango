@@ -38,7 +38,9 @@ def putdata():
     # print(data)
     print(now, "job02_02_working..")
 
-schedule.every(24).hours.do(putdata)
-while True:
-    schedule.run_pending()
-    time.sleep(1)
+if __name__ == "__main__":
+    schedule.every(24).hours.do(putdata)
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
+
