@@ -41,7 +41,7 @@ def jobprocess():
         driver.implicitly_wait(10)
 
         with MongoClient(db_url) as client:
-            job = client['jobdb']
+            job_db = client['jobdb']
             try:
                 jobs = driver.find_elements_by_xpath('//*[@id="contents"]/div/div/div')
                 I_name = driver.find_element_by_xpath('//*[@id="contents"]/div[4]/div[1]/p[2]').text
@@ -49,7 +49,7 @@ def jobprocess():
                     # 세부 데이터 수집
                         price = job.find_element_by_xpath("//ul/li[1]/div/strong").text
                 data={'Insert_name':Insert_name, 'company_name':C_name,'create_date':now, 'desc':I_name, 'payment':price,'work_time':C_date}
-                infor = job.datalist.insert_one(data)
+                infor = job_db.datalist.insert_one(data)
             except:
                 pass
 
