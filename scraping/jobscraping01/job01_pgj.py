@@ -2,11 +2,20 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
 from pymongo import MongoClient
-import datetime
+import datetime, os
+from selenium.webdriver.chrome.options import Options
 
 def w2m():
-    chromedriver = '/home/cloudera/Documents/Develop/project_october/chromedriver'  
-    driver = webdriver.Chrome(chromedriver)
+    strfile = os.path.dirname(os.path.realpath(__file__))
+    strfile = strfile + "/chromedriver_86_4240"
+
+    options = Options()
+    options.headless = True
+    driver = webdriver.Chrome(executable_path=strfile, options=options)
+    driver.implicitly_wait(3)
+
+    # chromedriver = '/home/cloudera/Documents/Develop/project_october/chromedriver'  
+    # driver = webdriver.Chrome(chromedriver)
     driver.get('https://www.work.go.kr/empInfo/indRev/indRevMain.do')
     ti = driver.find_element_by_xpath("/html//title") 
     c_search=driver.find_element_by_xpath('//*[@id="empListInfoDiv"]/div[3]/p/strong').text
@@ -39,7 +48,7 @@ def w2m():
             data = {"title": title, "job_url": link, "create_date": datetime.datetime.now()}
             dates.append(data)
             print (dates)
-            with MongoClient('mongodb://192.168.0.159:7020/')  as client:
+            with MongoClient('mongodb://192.168.0.159:27017/')  as client:
                 mydb = client.mydb
                 res = mydb.datalist.insert_many(dates)
             elem = driver.find_element_by_xpath('//*[@id="currentPageNo"]')

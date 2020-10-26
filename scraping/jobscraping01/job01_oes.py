@@ -15,7 +15,7 @@ def ConnectDB():
     리턴값 : MongoCLient 객체
     """
     # str_server = "mongodb://192.168.219.110:27017/"
-    str_server = "mongodb://127.0.0.1:7020/"
+    str_server = "mongodb://127.0.0.1:27017/"
 
     client = MongoClient(str_server)
     return client
@@ -102,7 +102,7 @@ def ReadWorkGoKr():
         InsertDB(client, 'jobdb', 'datalist', item)
     client.close()
 
-    ShowDB(client,  'jobdb', 'datalist')
+    # ShowDB(client,  'jobdb', 'datalist')
     
     # 종료하기
     driver.quit()

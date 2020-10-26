@@ -20,8 +20,7 @@ def scrapping_jobkorea(keyword='인공지능'):
                     'job_url':link, "create_date": datetime.datetime.now()}
             data.append(dic)
 
-        # with MongoClient('mongodb://127.0.0.1:27017/')  as client:
-        with MongoClient('mongodb://127.0.0.1:7020/')  as client:
+        with MongoClient('mongodb://127.0.0.1:27017/')  as client:
             mydb = client.jobdb
             res = mydb.datalist.insert_many(data)
 

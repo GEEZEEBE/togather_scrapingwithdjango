@@ -13,8 +13,7 @@ def paging(request, datalist, num=10):
     return page_obj, maxpage, minpage
 
 def list_job01(request):
-    # with MongoClient('mongodb://127.0.0.1:27017')  as client:
-    with MongoClient('mongodb://127.0.0.1:7020')  as client:
+    with MongoClient('mongodb://127.0.0.1:27017')  as client:
         jobdb = client.jobdb
         datalist = list(jobdb.datalist.find())
     data = dict()

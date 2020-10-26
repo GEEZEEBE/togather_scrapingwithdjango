@@ -11,7 +11,7 @@ import os
 from selenium.webdriver.chrome.options import Options
 
 def insertDB(data):
-        with MongoClient('mongodb://192.168.0.159:7020/') as client:
+        with MongoClient('mongodb://192.168.0.159:27017/') as client:
                 myworkdb = client['jobdb']
                 myworkdb.datalist.insert_one(data)
 
@@ -22,11 +22,12 @@ def Scrap():
 
         options = Options()
         options.headless = True
-        driver = webdriver.Chrome(executable_path=strfile, options=options)
-        driver.implicitly_wait(3)
+        # driver = webdriver.Chrome(executable_path=strfile, options=options)
+        # driver.implicitly_wait(3)
         # 추가 end 
         
-        with webdriver.Chrome(executable_path=strfile) as driver:
+        with webdriver.Chrome(executable_path=strfile, options=options) as driver:
+                driver.implicitly_wait(3)
                 url = "http://www.saramin.co.kr/zf_user/search?searchType=search&loc_mcd=101000%2C102000&company_cd=0%2C1%2C2%2C3%2C4%2C5%2C6%2C7%2C9%2C10&searchword=AI&panel_type=&search_optional_item=y&search_done=y&panel_count=y"
 
                 driver.get(url=url)

@@ -72,7 +72,7 @@ def worknet():
             
             driver.quit()
 
-            with MongoClient("mongodb://127.0.0.1:7020") as client:
+            with MongoClient("mongodb://127.0.0.1:27017") as client:
                 db = client.jobdb 
                 data = {"key_word":key_word,
                         "scraping_site":scraping_site,
