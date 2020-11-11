@@ -11,47 +11,6 @@ d_path = '/home/cho/Documents/Develop/web_config/driver/chromedriver_linux'
 
 
 
-
-# -------------------------------------------------- selenium ---------------------------------------------------------------
-def login(id_1,password,driver):
-    click = driver.find_element_by_css_selector('#header > div.top-area > div > div.util > a:nth-child(1)')
-    click.click()
-    id_info = driver.find_element_by_css_selector('#custId1')
-    pw_info = driver.find_element_by_css_selector('#pwd1')
-    button = driver.find_element_by_css_selector('#loginArea > div.login-form.login-idv > div.login-area > button')
-
-    id_info.send_keys(id_1)
-    pw_info.send_keys(password)
-    button.click()
-
-    
-
-def close_tab(driver,url1):
-    #time.sleep(1)
-    if len(driver.window_handles) > 2 :
-
-        for i in range(0,len(driver.window_handles)-1):
-            driver.switch_to.window(driver.window_handles[-1])
-            driver.close()  
-
-        last_tab = driver.window_handles[-1]
-        driver.switch_to.window(window_name=last_tab)
-    else :  # 새 탭이 로딩이 완전히 되지않아서 데이터를 못 읽어오는 것을 방지 하기위한 조건문 
-        i =0
-        while driver.current_url != url1: # 현재 driver 의 링크와 구직정보를 제공하는 링크가 동일하지 않은경우 대기
-            time.sleep(0.4)
-            i+=1
-            if i>5 :
-                break
-        last_tab = driver.window_handles[-1]            # 가장 최신단의 탭정보를 얻어옴
-        driver.switch_to.window(window_name=last_tab)   # 최신단의 탭으로 이동
-        last_tab = driver.window_handles[-1]            # 만약을 대비하기 위한 탭 이동코드
-        driver.switch_to.window(window_name=last_tab)
-        
-        if driver.current_url != url1 :                 # 만약 위의 과정을 거쳐도 url 이 같지 않은경우 강제로 이동시킴
-            driver.get(url=url1)
-
-
 def collectJobInfo(d_path):    
     with  MongoClient("mongodb://127.0.0.1:27017") as my_client: 
         url = 'https://www.work.go.kr/seekWantedMain.do'
